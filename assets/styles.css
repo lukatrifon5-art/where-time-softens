@@ -7,19 +7,20 @@
    ============================================================ */
 
 :root {
-  /* The day, top to bottom — a slow warming */
+  /* The day, top to bottom — a slow warming.
+     Deep end kept light enough that muted text still meets WCAG AA. */
   --dawn:      #F7F3EC;   /* palest morning */
-  --morning:   #F2EBDA;   /* mid-morning */
-  --noon:      #ECE0CA;   /* warm noon */
-  --afternoon: #E6D6B6;   /* early afternoon */
-  --dusk:      #DFCBA6;   /* golden hour */
-  --evening:   #D8C29E;   /* low sun */
-  --night:     #D0B896;   /* settled dusk (footer) */
+  --morning:   #F3ECDD;   /* mid-morning */
+  --noon:      #EEE5D3;   /* warm noon */
+  --afternoon: #E9DEC9;   /* early afternoon */
+  --dusk:      #E5D8C1;   /* golden hour */
+  --evening:   #E1D4BB;   /* low sun */
+  --night:     #DED0B5;   /* settled dusk (footer) */
 
   --champagne: #E7DCC8;
-  --grey:      #9E9488;   /* warm grey (AA on warm bg) */
-  --ink:       #4E463E;   /* warm grey-brown text */
-  --ink-soft:  #776E64;   /* muted body — darkened for AA on warm tones */
+  --grey:      #635949;   /* warm grey for labels/numerals — AA on warm bg */
+  --ink:       #4A423A;   /* warm grey-brown text */
+  --ink-soft:  #5A5045;   /* muted body — AA on warm tones */
   --light:     #F7F3EC;   /* text over image */
 
   --serif: "Cormorant Garamond", Georgia, serif;
@@ -54,6 +55,17 @@ body {
 
 img { max-width: 100%; display: block; }
 a { color: inherit; }
+
+/* Interactive: fast taps + a clear, adaptive keyboard focus ring.
+   currentColor tracks the text colour, so the ring stays visible on
+   both the dark hero and the light sections. */
+a, button { touch-action: manipulation; }
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+.button-cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 
 h1, h2, h3 {
   font-family: var(--serif);
@@ -647,6 +659,13 @@ h1, h2, h3 {
 
 @media (max-width: 560px) {
   .hero-scroll { display: none; }
+
+  /* Grow secondary-link tap areas to ~44px without shifting layout */
+  .header-link { padding: 0.7rem 0.4rem; margin: -0.7rem -0.4rem; }
+  .text-cta { padding: 0.6rem 0; }
+  .footer-col a,
+  .footer-top-link { display: inline-block; padding: 0.55rem 0; margin: -0.35rem 0; }
+
   .steps { grid-template-columns: 1fr; gap: 0; }
   .step { border-top: none; padding-top: 0; padding-bottom: 1.6rem; }
   .step + .step { border-top: 1px solid rgba(158, 148, 132, 0.4); padding-top: 1.6rem; }
