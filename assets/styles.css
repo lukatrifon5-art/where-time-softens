@@ -11,9 +11,10 @@
   --dawn:      #F7F3EC;   /* palest morning */
   --morning:   #F2EBDA;   /* mid-morning */
   --noon:      #ECE0CA;   /* warm noon */
-  --afternoon: #E7D8BB;   /* early afternoon */
-  --dusk:      #E1D0B0;   /* golden hour */
-  --night:     #D8C4A0;   /* settled dusk (footer) */
+  --afternoon: #E6D6B6;   /* early afternoon */
+  --dusk:      #DFCBA6;   /* golden hour */
+  --evening:   #D8C29E;   /* low sun */
+  --night:     #D0B896;   /* settled dusk (footer) */
 
   --champagne: #E7DCC8;
   --grey:      #9E9488;   /* warm grey (AA on warm bg) */
@@ -67,21 +68,9 @@ h1, h2, h3 {
 .day--noon      { background: var(--noon); }
 .day--afternoon { background: var(--afternoon); }
 .day--dusk      { background: var(--dusk); }
+.day--evening   { background: var(--evening); }
 .day--night     { background: var(--night); }
 
-/* Daylight wash — a warm amber that deepens with scroll progress (--day: 0→1) */
-.daylight {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(to bottom,
-    rgba(224, 176, 112, 0) 0%,
-    rgba(210, 150, 82, 0.5) 100%);
-  opacity: calc(var(--day, 0) * 0.14);
-  mix-blend-mode: multiply;
-  will-change: opacity;
-}
 
 /* ---------- Ambient film grain ---------- */
 .grain {
@@ -89,8 +78,7 @@ h1, h2, h3 {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.06;
-  mix-blend-mode: multiply;
+  opacity: 0.045;                 /* no blend-mode: plain overlay stays cheap */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 140px 140px;
 }
@@ -145,6 +133,7 @@ h1, h2, h3 {
   position: absolute; inset: 0;
   background: #cfc8bd url("img/hero.jpg") center 30% / cover no-repeat;
   transform: scale(1.06);
+  will-change: transform;
   animation: heroDrift 30s ease-in-out infinite alternate;
 }
 .hero-veil {
@@ -153,12 +142,12 @@ h1, h2, h3 {
     repeating-linear-gradient(
       92deg,
       rgba(247, 243, 236, 0.00) 0px,
-      rgba(247, 243, 236, 0.05) 14px,
-      rgba(120, 110, 98, 0.05) 30px,
+      rgba(247, 243, 236, 0.06) 14px,
+      rgba(120, 110, 98, 0.06) 30px,
       rgba(247, 243, 236, 0.00) 46px
     );
-  opacity: 0.6;
-  mix-blend-mode: soft-light;
+  opacity: 0.4;
+  will-change: transform, opacity;
   animation: veilDrift 26s ease-in-out infinite alternate;
 }
 .hero-scrim {
@@ -479,6 +468,38 @@ h1, h2, h3 {
 }
 
 /* ============================================================
+   4b. THE RITUAL — the steps of an unhurried visit
+   ============================================================ */
+.steps {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--measure);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  counter-reset: step;
+}
+.step { position: relative; padding-top: clamp(1.4rem, 2.5vw, 2rem); border-top: 1px solid rgba(158, 148, 132, 0.4); }
+.step-num {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  color: var(--grey);
+  margin-bottom: 0.9rem;
+}
+.step-name {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+}
+.step-note { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.65; margin: 0; }
+
+/* ============================================================
    6. BOOKING
    ============================================================ */
 .booking { text-align: center; }
@@ -567,15 +588,29 @@ h1, h2, h3 {
   opacity: 0;
   transform: translateY(30px);
   filter: blur(10px);
-  transition: opacity 1.5s var(--ease), transform 1.5s var(--ease), filter 1.6s var(--ease);
+  transition: opacity 1.4s var(--ease), transform 1.4s var(--ease), filter 1.5s var(--ease);
 }
 .js .reveal.in-view { opacity: 1; transform: none; filter: blur(0); }
+
+/* Staggered reveals — cards, film frames and steps arrive in gentle sequence.
+   (Only delays here; the hidden/visible states come from .reveal / .in-view.) */
+.js .rite.reveal.in-view:nth-child(2) { transition-delay: 0.1s; }
+.js .rite.reveal.in-view:nth-child(3) { transition-delay: 0.06s; }
+.js .rite.reveal.in-view:nth-child(4) { transition-delay: 0.16s; }
+.js .rite.reveal.in-view:nth-child(5) { transition-delay: 0.12s; }
+.js .rite.reveal.in-view:nth-child(6) { transition-delay: 0.22s; }
+.js .frame--b.reveal.in-view { transition-delay: 0.12s; }
+.js .frame--c.reveal.in-view { transition-delay: 0.24s; }
+.js .step.reveal.in-view:nth-child(2) { transition-delay: 0.1s; }
+.js .step.reveal.in-view:nth-child(3) { transition-delay: 0.2s; }
+.js .step.reveal.in-view:nth-child(4) { transition-delay: 0.3s; }
 
 /* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 860px) {
   .rite-list { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; }
   .filmstrip { grid-template-columns: 1fr 1fr; gap: 1rem; }
   .frame--a { grid-column: 1 / -1; margin-bottom: 1rem; }
   .frame--a img { aspect-ratio: 16 / 10; }
@@ -586,6 +621,9 @@ h1, h2, h3 {
 
 @media (max-width: 560px) {
   .hero-scroll { display: none; }
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .step { border-top: none; padding-top: 0; padding-bottom: 1.6rem; }
+  .step + .step { border-top: 1px solid rgba(158, 148, 132, 0.4); padding-top: 1.6rem; }
   .filmstrip { grid-template-columns: 1fr; }
   .frame--a img, .frame--b img, .frame--c img { aspect-ratio: 4 / 3; }
   .footer-base { justify-content: center; text-align: center; }

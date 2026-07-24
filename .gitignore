@@ -8,3 +8,5 @@ Thumbs.db
 
 # Deps (none needed for this static site)
 node_modules/
+
+.vercel

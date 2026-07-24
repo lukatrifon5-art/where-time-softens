@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
+  <link rel="preload" as="image" href="assets/img/hero.jpg" fetchpriority="high" />
   <link rel="stylesheet" href="assets/styles.css" />
 
   <!-- Mark JS available before paint so reveal-hiding only applies with JS on. -->
@@ -31,8 +32,6 @@
 
   <!-- Ambient film grain — a whole-page analog warmth -->
   <div class="grain" aria-hidden="true"></div>
-  <!-- Daylight wash — warms as you scroll, the way an afternoon does -->
-  <div class="daylight" aria-hidden="true"></div>
 
   <!-- Slim header -->
   <header class="site-header">
@@ -76,8 +75,8 @@
     </section>
 
     <!-- 3. TREATMENTS — a slow menu, measured in time (mid-morning) -->
-    <section class="section rites day day--morning reveal">
-      <div class="section-head">
+    <section class="section rites day day--morning">
+      <div class="section-head reveal">
         <p class="section-eyebrow">The menu · measured in time</p>
         <h2 class="section-title">Nothing here is rushed</h2>
         <p class="section-intro">
@@ -87,7 +86,7 @@
       </div>
 
       <ul class="rite-list">
-        <li class="rite">
+        <li class="rite reveal">
           <span class="rite-time">90<span class="rite-unit">min</span></span>
           <div class="rite-body">
             <h3 class="rite-name">Collagen Renewal</h3>
@@ -95,7 +94,7 @@
           </div>
           <span class="rite-price">$290</span>
         </li>
-        <li class="rite">
+        <li class="rite reveal">
           <span class="rite-time">75<span class="rite-unit">min</span></span>
           <div class="rite-body">
             <h3 class="rite-name">Slow Resurfacing</h3>
@@ -103,7 +102,7 @@
           </div>
           <span class="rite-price">$220</span>
         </li>
-        <li class="rite">
+        <li class="rite reveal">
           <span class="rite-time">90<span class="rite-unit">min</span></span>
           <div class="rite-body">
             <h3 class="rite-name">Redensifying Facial</h3>
@@ -111,7 +110,7 @@
           </div>
           <span class="rite-price">$260</span>
         </li>
-        <li class="rite">
+        <li class="rite reveal">
           <span class="rite-time">60<span class="rite-unit">min</span></span>
           <div class="rite-body">
             <h3 class="rite-name">Neck &amp; D&eacute;collet&eacute; Restoration</h3>
@@ -119,7 +118,7 @@
           </div>
           <span class="rite-price">$340</span>
         </li>
-        <li class="rite">
+        <li class="rite reveal">
           <span class="rite-time">45<span class="rite-unit">min</span></span>
           <div class="rite-body">
             <h3 class="rite-name">LED Light Therapy</h3>
@@ -127,7 +126,7 @@
           </div>
           <span class="rite-price">$150</span>
         </li>
-        <li class="rite">
+        <li class="rite reveal">
           <span class="rite-time">60<span class="rite-unit">min</span></span>
           <div class="rite-body">
             <h3 class="rite-name">Longevity Consultation</h3>
@@ -139,8 +138,8 @@
     </section>
 
     <!-- 4. EXPERIENCE — a slow morning, as a strip of film (noon warmth) -->
-    <section class="section experience day day--noon reveal">
-      <div class="experience-lead">
+    <section class="section experience day day--noon">
+      <div class="experience-lead reveal">
         <p class="section-eyebrow">The room</p>
         <h2 class="section-title">A slow morning, kept on film</h2>
         <p class="section-intro">
@@ -151,19 +150,55 @@
       </div>
 
       <div class="filmstrip">
-        <figure class="frame frame--a">
-          <img src="assets/img/experience-1.jpg" alt="Morning light through sheer linen curtains" loading="lazy" width="900" height="1350" />
+        <figure class="frame frame--a reveal">
+          <img src="assets/img/experience-1.jpg" alt="Morning light through sheer linen curtains" loading="lazy" decoding="async" width="900" height="1350" />
           <figcaption>The light arrives</figcaption>
         </figure>
-        <figure class="frame frame--b">
-          <img src="assets/img/experience-2.jpg" alt="The fine weave of a sheer linen curtain" loading="lazy" width="900" height="600" />
+        <figure class="frame frame--b reveal">
+          <img src="assets/img/experience-2.jpg" alt="The fine weave of a sheer linen curtain" loading="lazy" decoding="async" width="900" height="600" />
           <figcaption>Linen, softened by washing</figcaption>
         </figure>
-        <figure class="frame frame--c">
-          <img src="assets/img/experience-3.jpg" alt="Dried grasses in a pale ceramic vase" loading="lazy" width="900" height="1350" />
+        <figure class="frame frame--c reveal">
+          <img src="assets/img/experience-3.jpg" alt="Dried grasses in a pale ceramic vase" loading="lazy" decoding="async" width="900" height="1350" />
           <figcaption>Kept, not preserved</figcaption>
         </figure>
       </div>
+    </section>
+
+    <!-- 4b. THE RITUAL — how an unhurried visit unfolds (early afternoon) -->
+    <section class="section ritual day day--afternoon">
+      <div class="section-head reveal">
+        <p class="section-eyebrow">The visit</p>
+        <h2 class="section-title">An afternoon, not an appointment</h2>
+        <p class="section-intro">
+          There is no conveyor belt here. A first visit runs about ninety
+          minutes &mdash; most of it spent simply understanding your skin, and
+          you.
+        </p>
+      </div>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num">01</span>
+          <h3 class="step-name">Arrive slowly</h3>
+          <p class="step-note">Tea, a quiet room, and no forms to hurry through.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">02</span>
+          <h3 class="step-name">A long consultation</h3>
+          <p class="step-note">We read your skin and your history, and plan for years, not weeks.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">03</span>
+          <h3 class="step-name">The treatment</h3>
+          <p class="step-note">Gentle, gradual, never more than the skin quietly asks for.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">04</span>
+          <h3 class="step-name">Time to return</h3>
+          <p class="step-note">Results unfold over weeks. We leave with the next visit already set.</p>
+        </li>
+      </ol>
     </section>
 
     <!-- 5. SLOW ROOM — the day tips into gold. The demo's quiet statement. -->
@@ -175,8 +210,8 @@
       </div>
     </section>
 
-    <!-- One quiet voice — social proof, kept to a whisper (afternoon) -->
-    <section class="section quiet-quote day day--afternoon reveal">
+    <!-- One quiet voice — social proof, kept to a whisper (dusk) -->
+    <section class="section quiet-quote day day--dusk reveal">
       <figure class="quote">
         <blockquote>
           I stopped watching the clock here. Now I come for the mornings &mdash;
@@ -187,7 +222,7 @@
     </section>
 
     <!-- 6. BOOKING — the end of the day, warm and low (golden hour) -->
-    <section class="section booking day day--dusk reveal">
+    <section class="section booking day day--evening reveal">
       <div class="booking-inner">
         <p class="booking-eyebrow">Booking</p>
         <p class="booking-line">When you&rsquo;re ready, so are we.</p>
